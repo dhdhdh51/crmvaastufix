@@ -86,10 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($tab === 'sections') {
-            $section_keys = ['show_hero','show_featured','show_stats','show_services','show_testimonials','show_team','show_blog','show_cta','show_popup_lead','show_sticky_buttons'];
+            $section_keys = ['section_hero','section_featured','section_stats','section_services','section_testimonials','section_team','section_blog','section_cta','section_popup','section_sticky'];
             foreach ($section_keys as $k) {
                 $fields[$k] = isset($_POST[$k]) ? '1' : '0';
             }
+            // popup_enabled drives the actual popup visibility
+            $fields['popup_enabled'] = isset($_POST['section_popup']) ? '1' : '0';
         }
 
         if ($tab === 'email') {
@@ -640,16 +642,16 @@ require_once __DIR__ . '/layout-header.php';
             <div class="row g-3">
               <?php
               $section_opts = [
-                'show_hero'           => ['icon'=>'fa-image',          'label'=>'Hero / Banner Section',          'desc'=>'Full-width hero with search'],
-                'show_featured'       => ['icon'=>'fa-home',           'label'=>'Featured Properties',            'desc'=>'Grid of featured listings'],
-                'show_stats'          => ['icon'=>'fa-chart-bar',      'label'=>'Statistics Counter',             'desc'=>'Properties sold, clients, years'],
-                'show_services'       => ['icon'=>'fa-concierge-bell', 'label'=>'Services Section',               'desc'=>'What we offer cards'],
-                'show_testimonials'   => ['icon'=>'fa-quote-right',    'label'=>'Testimonials / Reviews',         'desc'=>'Client testimonial slider'],
-                'show_team'           => ['icon'=>'fa-users',          'label'=>'Team Section',                   'desc'=>'Meet our team cards'],
-                'show_blog'           => ['icon'=>'fa-blog',           'label'=>'Latest Blog Posts',              'desc'=>'Recent articles on homepage'],
-                'show_cta'            => ['icon'=>'fa-bullhorn',       'label'=>'Call-to-Action Section',         'desc'=>'Bottom CTA / contact banner'],
-                'show_popup_lead'     => ['icon'=>'fa-bell',           'label'=>'Lead Popup Form',                'desc'=>'Triggered on scroll'],
-                'show_sticky_buttons' => ['icon'=>'fa-thumbtack',      'label'=>'Sticky Call / WhatsApp Buttons', 'desc'=>'Floating action buttons'],
+                'section_hero'        => ['icon'=>'fa-image',          'label'=>'Hero / Banner Section',          'desc'=>'Full-width hero with search'],
+                'section_featured'    => ['icon'=>'fa-home',           'label'=>'Featured Properties',            'desc'=>'Grid of featured listings'],
+                'section_stats'       => ['icon'=>'fa-chart-bar',      'label'=>'Statistics Counter',             'desc'=>'Properties sold, clients, years'],
+                'section_services'    => ['icon'=>'fa-concierge-bell', 'label'=>'Services Section',               'desc'=>'What we offer cards'],
+                'section_testimonials'=> ['icon'=>'fa-quote-right',    'label'=>'Testimonials / Reviews',         'desc'=>'Client testimonial slider'],
+                'section_team'        => ['icon'=>'fa-users',          'label'=>'Team Section',                   'desc'=>'Meet our team cards'],
+                'section_blog'        => ['icon'=>'fa-blog',           'label'=>'Latest Blog Posts',              'desc'=>'Recent articles on homepage'],
+                'section_cta'         => ['icon'=>'fa-bullhorn',       'label'=>'Call-to-Action Section',         'desc'=>'Bottom CTA / contact banner'],
+                'section_popup'       => ['icon'=>'fa-bell',           'label'=>'Lead Popup Form',                'desc'=>'Triggered on scroll'],
+                'section_sticky'      => ['icon'=>'fa-thumbtack',      'label'=>'Sticky Call / WhatsApp Buttons', 'desc'=>'Floating action buttons'],
               ];
               foreach ($section_opts as $key => $opt):
                 $checked = ($s[$key] ?? '1') === '1';

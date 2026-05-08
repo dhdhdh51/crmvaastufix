@@ -12,7 +12,7 @@ $linkedin    = getSetting('linkedin_url');
 $footerAbout = getSetting('footer_about');
 ?>
 <!-- POPUP -->
-<?php if (getSetting('popup_enabled', '1') === '1'): ?>
+<?php if (getSetting('section_popup', getSetting('popup_enabled', '1')) === '1'): ?>
 <div class="popup-overlay" id="lead-popup" data-delay="<?= getSetting('popup_delay', '5000') ?>">
     <div class="popup-card">
         <button class="popup-close" aria-label="Close">✕</button>
@@ -221,6 +221,7 @@ $footerAbout = getSetting('footer_about');
 </script>
 
 <!-- STICKY BUTTONS -->
+<?php if (getSetting('section_sticky', '1') === '1'): ?>
 <div class="sticky-buttons">
     <a href="tel:<?= preg_replace('/\s/', '', $phone) ?>" class="sticky-btn sticky-call" title="Call Now">
         <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
@@ -229,6 +230,7 @@ $footerAbout = getSetting('footer_about');
         <i class="fab fa-whatsapp" style="font-size:1.4rem"></i>
     </a>
 </div>
+<?php endif; ?>
 
 <!-- BOTTOM CTA BAR (mobile) -->
 <div class="bottom-cta-bar">
