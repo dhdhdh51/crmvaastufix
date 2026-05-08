@@ -1,2 +1,4 @@
 extracted/
 *.zip
+error_log
+uploads/
